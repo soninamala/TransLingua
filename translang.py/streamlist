@@ -1,0 +1,39 @@
+from transformers import pipeline
+
+# Mapping of languages to HuggingFace models
+
+language_model_map = {
+    "Arabic": "Helsinki-NLP/opus-mt-en-ar",
+    "Bengali":"Helsinki-NLP/opus-mt-en-bn",
+    "Chinese":"Helsinki-NLP/opus-mt-en-zh",
+    "Czech": "Helsinki-NLP/opus-mt-en-cs",
+    "Danish":"Helsinki-NLP/opus-mt-en-da",
+    "Dutch": "Helsinki-NLP/opus-mt-en-n1",
+    "Finnish":"Helsinki-NLP/opus-mt-en-fi",
+    "French":"Helsinki-NLP/opus-mt-en-fr",
+    "German":"Helsinki-NLP/opus-mt-en-de",
+    "Greek": "Helsinki-NLP/opus-mt-en-el",
+    "Hindi":"Helsinki-NLP/opus-mt-en-hi",
+    "Hungarian": "Helsinki-NLP/opus-mt-en-hu",
+    "Indonesian": "Helsinki-NLP/opus-mt-en-id",
+    "Italian": "Helsinki-NLP/opus-mt-en-it",
+    "Japanese": "Helsinki-NLP/opus-mt-en-ja",
+    "Korean": "Helsinki-NLP/opus-mt-en-ko",
+    "Polish": "Helsinki-NLP/opus-mt-en-pl",
+    "Portuguese": "Helsinki-NLP/opus-mt-en-pt",
+    "Romanian": "Helsinki-NLP/opus-mt-en-ro",
+    "Russian": "Helsinki-NLP/opus-mt-en-ru",
+    "Spanish": "Helsinki-NLP/opus-mt-en-es",
+    "Turkish": "Helsinki-NLP/opus-mt-en-tr",
+    "Ukrainian": "Helsinki-NLP/opus-mt-en-uk",
+    "Urdu": "Helsinki-NLP/opus-mt-en-ur",
+    "Vietnamese": "Helsinki-NLP/opus-mt-en-vi",
+}
+#Pre-load translators
+
+translators = {}
+for lang, model_name in language_model_map.items():
+    try:
+        translators [lang]=pipeline("translation", model=model_name)
+    except:
+        print(f"Failed to load model for {lang}")
